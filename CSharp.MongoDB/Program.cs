@@ -39,14 +39,15 @@ namespace CSharp.MongoDB
 
             //peopleDB.DeleteOne(d => d.Id == "6089d0ab6c3db54c32838b99");
 
-            var PeopleConfig = new MapperConfiguration(cfg =>
+            MapperConfiguration PeopleConfig = new MapperConfiguration(cfg =>
                 cfg.CreateMap<People, PeopleDTO>()
             );
-
+            // and if the attribute name is different 
+            // . ForMember ( dest = > dest. FullName , act = > act. MapFrom ( src = > src. Name ))
             Mapper mapper = new Mapper(PeopleConfig);
-            //var peopleDTO = mapper.Map<PeopleDTO>(people);
+            PeopleDTO peopleDTO2 = mapper.Map<People, PeopleDTO>(people);
 
-            var peopleDTO2 = mapper.Map<People, PeopleDTO>(people);
+            //var peopleDTO = mapper.Map<PeopleDTO>(people);
 
             Console.WriteLine($"nombre: {peopleDTO2.Nombre}, edad: {peopleDTO2.Edad}, id: {peopleDTO2.Id}");
         }
